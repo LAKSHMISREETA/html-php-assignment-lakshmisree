@@ -1,0 +1,30 @@
+ products.php 
+<?php
+session_start();
+
+// Sample product list
+$products = [
+    1 => "Laptop",
+    2 => "Smartphone",
+    3 => "Headphones"
+];
+
+// Add item to cart if requested
+if (isset($_GET['add'])) {
+    $id = $_GET['add'];
+    $_SESSION['cart'][] = $products[$id];
+    echo "<p style='color:green;'>Item added to cart!</p>";
+}
+?>
+
+<h2>Product List</h2>
+<ul>
+<?php foreach ($products as $id => $name): ?>
+    <li>
+        <?php echo $name; ?> 
+        <a href="?add=<?php echo $id; ?>">Add to Cart</a>
+    </li>
+<?php endforeach; ?>
+</ul>
+
+<p><a href="cart.php">View Cart</a></p>
